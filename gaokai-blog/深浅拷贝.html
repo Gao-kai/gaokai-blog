@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>JS中深浅克隆的含义 | 高凯的JavaScript博客</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    <link rel="icon" href="/gaokai-blog/logo.jpg">
+    <meta name="description" content="一个前端工程师写东西的地方">
+    
+    <link rel="preload" href="/gaokai-blog/assets/css/0.styles.8e1d4554.css" as="style"><link rel="preload" href="/gaokai-blog/assets/js/app.4602dd1e.js" as="script"><link rel="preload" href="/gaokai-blog/assets/js/3.ad6a990c.js" as="script"><link rel="preload" href="/gaokai-blog/assets/js/1.9e037d9f.js" as="script"><link rel="preload" href="/gaokai-blog/assets/js/13.64a46518.js" as="script"><link rel="prefetch" href="/gaokai-blog/assets/js/10.ed5ad18c.js"><link rel="prefetch" href="/gaokai-blog/assets/js/11.cf08b4f2.js"><link rel="prefetch" href="/gaokai-blog/assets/js/12.d14a13df.js"><link rel="prefetch" href="/gaokai-blog/assets/js/4.ba36a761.js"><link rel="prefetch" href="/gaokai-blog/assets/js/5.5791b558.js"><link rel="prefetch" href="/gaokai-blog/assets/js/6.6388cacd.js"><link rel="prefetch" href="/gaokai-blog/assets/js/7.15b4c143.js"><link rel="prefetch" href="/gaokai-blog/assets/js/8.15bec023.js"><link rel="prefetch" href="/gaokai-blog/assets/js/9.f5f69715.js">
+    <link rel="stylesheet" href="/gaokai-blog/assets/css/0.styles.8e1d4554.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar" data-v-130b300a><div data-v-130b300a><div class="password-shadow password-wrapper-out" style="display:none;" data-v-25ba6db2 data-v-130b300a data-v-130b300a><h3 class="title" data-v-25ba6db2 data-v-25ba6db2>高凯的JavaScript博客</h3> <p class="description" data-v-25ba6db2 data-v-25ba6db2>一个前端工程师写东西的地方</p> <label id="box" class="inputBox" data-v-25ba6db2 data-v-25ba6db2><input type="password" value="" data-v-25ba6db2> <span data-v-25ba6db2>Konck! Knock!</span> <button data-v-25ba6db2>OK</button></label> <div class="footer" data-v-25ba6db2 data-v-25ba6db2><span data-v-25ba6db2><i class="iconfont reco-theme" data-v-25ba6db2></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-25ba6db2>vuePress-theme-reco</a></span> <span data-v-25ba6db2><i class="iconfont reco-copyright" data-v-25ba6db2></i> <a data-v-25ba6db2><!---->
+            
+          <!---->
+          2023
+        </a></span></div></div> <div class="hide" data-v-130b300a><header class="navbar" data-v-130b300a><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/gaokai-blog/" class="home-link router-link-active"><img src="/gaokai-blog/logo.jpg" alt="高凯的JavaScript博客" class="logo"> <span class="site-name">高凯的JavaScript博客</span></a> <div class="links"><div class="color-picker"><a class="color-button"><i class="iconfont reco-color"></i></a> <div class="color-picker-menu" style="display:none;"><div class="mode-options"><h4 class="title">Choose mode</h4> <ul class="color-mode-options"><li class="dark">dark</li><li class="auto active">auto</li><li class="light">light</li></ul></div></div></div> <div class="search-box"><i class="iconfont reco-search"></i> <input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/gaokai-blog/" class="nav-link"><i class="undefined"></i>
+  首页
+</a></div><div class="nav-item"><a href="/gaokai-blog/js/数据类型.html" class="nav-link"><i class="undefined"></i>
+  JavaScript进阶
+</a></div><div class="nav-item"><a href="/gaokai-blog/algorithm/" class="nav-link"><i class="undefined"></i>
+  数据结构与算法
+</a></div><div class="nav-item"><a href="/gaokai-blog/vue/" class="nav-link"><i class="undefined"></i>
+  Vue
+</a></div><div class="nav-item"><a href="/gaokai-blog/react/" class="nav-link"><i class="undefined"></i>
+  React
+</a></div><div class="nav-item"><a href="/gaokai-blog/webpack/" class="nav-link"><i class="undefined"></i>
+  webpack构建工具
+</a></div> <!----></nav></div></header> <div class="sidebar-mask" data-v-130b300a></div> <aside class="sidebar" data-v-130b300a><div class="personal-info-wrapper" data-v-39576ba9 data-v-130b300a><!----> <!----> <div class="num" data-v-39576ba9><div data-v-39576ba9><h3 data-v-39576ba9>3</h3> <h6 data-v-39576ba9>Articles</h6></div> <div data-v-39576ba9><h3 data-v-39576ba9>0</h3> <h6 data-v-39576ba9>Tags</h6></div></div> <ul class="social-links" data-v-39576ba9></ul> <hr data-v-39576ba9></div> <nav class="nav-links"><div class="nav-item"><a href="/gaokai-blog/" class="nav-link"><i class="undefined"></i>
+  首页
+</a></div><div class="nav-item"><a href="/gaokai-blog/js/数据类型.html" class="nav-link"><i class="undefined"></i>
+  JavaScript进阶
+</a></div><div class="nav-item"><a href="/gaokai-blog/algorithm/" class="nav-link"><i class="undefined"></i>
+  数据结构与算法
+</a></div><div class="nav-item"><a href="/gaokai-blog/vue/" class="nav-link"><i class="undefined"></i>
+  Vue
+</a></div><div class="nav-item"><a href="/gaokai-blog/react/" class="nav-link"><i class="undefined"></i>
+  React
+</a></div><div class="nav-item"><a href="/gaokai-blog/webpack/" class="nav-link"><i class="undefined"></i>
+  webpack构建工具
+</a></div> <!----></nav> <!----> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-25ba6db2 data-v-130b300a><h3 class="title" data-v-25ba6db2 data-v-25ba6db2></h3> <!----> <label id="box" class="inputBox" data-v-25ba6db2 data-v-25ba6db2><input type="password" value="" data-v-25ba6db2> <span data-v-25ba6db2>Konck! Knock!</span> <button data-v-25ba6db2>OK</button></label> <div class="footer" data-v-25ba6db2 data-v-25ba6db2><span data-v-25ba6db2><i class="iconfont reco-theme" data-v-25ba6db2></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-25ba6db2>vuePress-theme-reco</a></span> <span data-v-25ba6db2><i class="iconfont reco-copyright" data-v-25ba6db2></i> <a data-v-25ba6db2><!---->
+            
+          <!---->
+          2023
+        </a></span></div></div> <div data-v-130b300a><main class="page"><section><div class="page-title"><h1 class="title">JS中深浅克隆的含义</h1> <div data-v-f875f3fc><!----> <!----> <!----> <!----></div></div> <div class="theme-reco-content content__default"><h2 id="js中深浅克隆的含义"><a href="#js中深浅克隆的含义" class="header-anchor">#</a> JS中深浅克隆的含义</h2> <p>浅克隆：只将一个对象的第一层进行克隆一份，对于原对象的后代级别还是共用一个内存地址，所以克隆后的对象去操作这些后代级别的对象会修改原始对象中后代级别的值。</p> <p>深克隆：将一个对象的每一层都克隆一份，克隆后的对象操作不会影响源对象中的值，克隆前后的两个对象是两个引用地址，并且里面的每一层都是不同的引用地址。但是深克隆会额外开辟其他的堆内存地址，这是深克隆的一个缺点。</p> <p>不管是深克隆还是浅克隆，克隆的意思是至少复制一份看起来一模一样的数据，是一个全新的堆内存。直接将引用值赋值给另外一个引用值，并不是克隆，而是代表共用同一个堆内存空间。</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">let</span> obj1 <span class="token operator">=</span> <span class="token punctuation">{</span>
+	<span class="token literal-property property">name</span><span class="token operator">:</span><span class="token string">'james'</span><span class="token punctuation">,</span>
+	<span class="token literal-property property">age</span><span class="token operator">:</span><span class="token number">36</span><span class="token punctuation">,</span>
+	<span class="token literal-property property">cham</span><span class="token operator">:</span><span class="token punctuation">{</span>
+		<span class="token literal-property property">cle</span><span class="token operator">:</span><span class="token number">2016</span><span class="token punctuation">,</span>
+		<span class="token literal-property property">miami</span><span class="token operator">:</span><span class="token punctuation">[</span><span class="token number">2012</span><span class="token punctuation">,</span><span class="token number">2013</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+		<span class="token literal-property property">lakers</span><span class="token operator">:</span><span class="token punctuation">[</span><span class="token number">2020</span><span class="token punctuation">,</span><span class="token number">2021</span><span class="token punctuation">]</span>
+	<span class="token punctuation">}</span><span class="token punctuation">,</span>
+	<span class="token literal-property property">points</span><span class="token operator">:</span><span class="token punctuation">[</span><span class="token number">1000</span><span class="token punctuation">,</span><span class="token number">2000</span><span class="token punctuation">,</span><span class="token punctuation">{</span><span class="token literal-property property">most</span><span class="token operator">:</span><span class="token number">36000</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token number">40000</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">let</span> obj2 <span class="token operator">=</span> obj1<span class="token punctuation">;</span>
+</code></pre></div><h2 id="最简单的办法-循环遍历对象-挨个进行赋值-浅克隆"><a href="#最简单的办法-循环遍历对象-挨个进行赋值-浅克隆" class="header-anchor">#</a> 最简单的办法：循环遍历对象，挨个进行赋值，浅克隆</h2> <blockquote><blockquote><blockquote><p>通过for...in循环遍历对象属性：不可以遍历Symbol值，不选用此方案
+for...in循环遍历的特点：</p></blockquote></blockquote></blockquote> <ol><li>for in循环只遍历当前对象的所有可枚举属性，原型及原型链上的内置不可枚举属性不会遍历</li> <li>如果手动给当前对象的原型上添加一个属性，那么该属性会被for in遍历，这也就是说for in循环并不会自动过滤掉原型上的可枚举属性</li> <li>for in循环不会遍历对象中属性为Symbol值的属性,所以直接通过for in循环来完成克隆会导致遗漏对象上的Symbol值为属性的值。</li></ol> <blockquote><blockquote><blockquote><p>先获取对象自身所有可枚举属性以及Symbol值属性，然后通过forEach循环遍历
+基于Object.keys(obj)获取obj对象上所有可枚举的属性的数组
+基于Object.getOwnPropertySymbols(obj)获取obj对象上所有Symbol值为属性的数组
+基于展开运算符...将两个数组进行合并，此数组中装的是该对象的所有可遍历属性名组成的数组
+新建一个对象，将该数组进行遍历，挨个拿到值进行赋值。</p></blockquote></blockquote></blockquote> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">let</span> newObj <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> objKeys <span class="token operator">=</span> <span class="token punctuation">[</span>
+	<span class="token operator">...</span>Object<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span>obj1<span class="token punctuation">)</span><span class="token punctuation">,</span>
+	<span class="token operator">...</span>Object<span class="token punctuation">.</span><span class="token function">getOwnPropertySymbols</span><span class="token punctuation">(</span>obj1<span class="token punctuation">)</span>
+<span class="token punctuation">]</span><span class="token punctuation">;</span>
+objKeys<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token parameter">key</span><span class="token operator">=&gt;</span><span class="token punctuation">{</span>
+	newObj<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> obj1<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>newObj<span class="token punctuation">)</span>
+obj1 <span class="token operator">===</span> newObj            <span class="token boolean">false</span>  克隆后两个对象指向不同堆内存
+obj1<span class="token punctuation">.</span>cham <span class="token operator">===</span> newObj<span class="token punctuation">.</span>cham  <span class="token boolean">true</span>   但是深层引用值还是共用同一个堆内存地址
+</code></pre></div><h2 id="浅克隆对象的方案"><a href="#浅克隆对象的方案" class="header-anchor">#</a> 浅克隆对象的方案</h2> <ol><li>基于ES6的展开运算符 浅克隆</li></ol> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">let</span> newObj <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token operator">...</span>obj<span class="token punctuation">}</span><span class="token punctuation">;</span>
+newObj <span class="token operator">===</span> obj<span class="token punctuation">;</span>   <span class="token boolean">false</span>
+obj1<span class="token punctuation">.</span>cham <span class="token operator">===</span> newObj<span class="token punctuation">.</span>cham  <span class="token boolean">true</span>
+</code></pre></div><ol start="2"><li>基于Object.assign() 浅克隆
+语法：Object.assign(obj1,obj2)
+参数：obj1 目标对象
+obj2 提供拓展属性的对象
+功能：  将第二个参数obj2对象的所有键值对和目标对象的键值对结合，完成对象的合并
+返回值：返回经过拓展属性后的目标对象obj1
+注意：  经过操作后并没有新建一个对象，而是在obj1对象的堆内存地址上进行操作的
+let res = Object.assign(obj1，{});
+此时res和obj1都指向同一个堆内存地址，操作res的同时会影响obj1对象。所以在基于此方法进行浅克隆的时候，第一个参数目标对象应该是空对象，第二个提供键值对的对象才应该是要克隆的原始对象。</li></ol> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">let</span> newObj <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>obj1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+obj1 <span class="token operator">===</span> newObj<span class="token punctuation">;</span>           <span class="token boolean">false</span>
+obj1<span class="token punctuation">.</span>cham <span class="token operator">===</span> newObj<span class="token punctuation">.</span>cham  <span class="token boolean">true</span>
+</code></pre></div><h2 id="浅克隆数组的方案"><a href="#浅克隆数组的方案" class="header-anchor">#</a> 浅克隆数组的方案</h2> <p>let arr = [10,20,[10,50],1666];</p> <ol><li>基于循环遍历 forEach/map</li></ol> <div class="language-js extra-class"><pre class="language-js"><code>arr<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">item<span class="token punctuation">,</span>index</span><span class="token punctuation">)</span><span class="token operator">=&gt;</span><span class="token punctuation">{</span>
+	newArr<span class="token punctuation">[</span>index<span class="token punctuation">]</span> <span class="token operator">=</span> arr<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+或者
+
+<span class="token keyword">let</span> newArr <span class="token operator">=</span> arr<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token parameter">item</span><span class="token operator">=&gt;</span>item<span class="token punctuation">)</span><span class="token punctuation">;</span>
+			
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>newArr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>newArr<span class="token operator">===</span>arr<span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token boolean">false</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>newArr<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token operator">===</span>arr<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token boolean">true</span>
+
+</code></pre></div><ol start="2"><li><p>基于ES6展开运算符
+let newArr = [...arr];</p></li> <li><p>基于数组的slice()方法
+let newArr = arr.slice();</p></li> <li><p>基于数组的concat()方法
+let newArr = arr.concat();</p></li> <li><p>基于Object.assign()方法
+let newArr = Object.assign([],arr);</p></li></ol> <h2 id="快速深克隆简单对象-数组的方案-json-parse-json-stringify"><a href="#快速深克隆简单对象-数组的方案-json-parse-json-stringify" class="header-anchor">#</a> 快速深克隆简单对象/数组的方案 JSON.parse(JSON.stringify())</h2> <ul><li>基于JSON.parse(JSON.stringify()) 进行深克隆
+JSON.stringify() 将对象转化为JSON字符串
+JSON.parse()     将JSON字符串转化为对象，此时对象中的每一个引用值都开辟一个全新的堆内存存储
+优点：可以快速完成对于常规对象/数组的深克隆
+缺点：JSON.stringify()方法在序列化一个对象/数组的时候，该对象/数组中的属性值是以下类型的话，会出现错误或者属性值被忽略丢失的情况：</li> <li>正则对象/\d/gi会在序列化的过程中被转化为空对象</li> <li>undefiend、函数function以及Symbold值都会在对象序列化的过程中被忽略</li> <li>值为BigInt类型的值在处理的过程中会报错</li> <li>值为日期时间对象的值会转化为一个字符串</li></ul> <h2 id="重点-手写一个浅克隆方法shallowclone"><a href="#重点-手写一个浅克隆方法shallowclone" class="header-anchor">#</a> 重点：手写一个浅克隆方法shallowClone</h2> <ol><li><p>需要考虑处理普通对象和普通数组以及类数组对象</p></li> <li><p>需要考虑获取对象和数组的所有私有属性，包含Symbol类型属性在内</p></li> <li><p>需要考虑基本数据类型，并且要考虑到基本数据包装类通过typeof检测会返回object</p></li> <li><p>需要考虑如何处理一个函数，返回一个内存地址一样的函数</p></li> <li><p>需要考虑如何处理一个正则对象</p></li> <li><p>需要考虑如何处理一个日期时间对象</p></li></ol> <blockquote><blockquote><blockquote><p>封装用于数据类型检测的方法checkType</p></blockquote></blockquote></blockquote> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">function</span> <span class="token function">checkType</span><span class="token punctuation">(</span><span class="token parameter">value</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	<span class="token keyword">let</span> type <span class="token operator">=</span> <span class="token class-name">Object</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">return</span> type<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><blockquote><blockquote><blockquote><p>封装用于获取对象自身所有私有属性的方法getOwnProperty</p></blockquote></blockquote></blockquote> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">function</span> <span class="token function">getOwnProperty</span><span class="token punctuation">(</span><span class="token parameter">obj</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	<span class="token keyword">if</span><span class="token punctuation">(</span>obj<span class="token operator">==</span><span class="token keyword">null</span><span class="token punctuation">)</span><span class="token keyword">return</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+	<span class="token keyword">return</span> <span class="token punctuation">[</span>
+		<span class="token operator">...</span>Object<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">,</span>
+		<span class="token operator">...</span>Object<span class="token punctuation">.</span><span class="token function">getOwnPropertySymbols</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre></div><blockquote><blockquote><blockquote><p>尽可能的多考虑数据类型的浅克隆shallowClone</p></blockquote></blockquote></blockquote> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">function</span> <span class="token function">shallowClone</span><span class="token punctuation">(</span><span class="token parameter">obj</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	<span class="token comment">/* 对7种基本数据类型的浅克隆 直接返回值即可 */</span>
+	<span class="token keyword">let</span> type <span class="token operator">=</span> <span class="token function">checkType</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token comment">/* 不用typeof是为了避免基本数据包装类的干扰 */</span>
+	<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">^(Number|String|Boolean|Null|Undefined|Symbol|BigInt)$</span><span class="token regex-delimiter">/</span></span><span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>type<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+		<span class="token keyword">return</span> obj<span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+	<span class="token comment">/* 如果是函数返回一个新的函数 执行新的函数 原来函数也会一起执行 */</span>
+	<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> obj <span class="token operator">===</span> <span class="token string">'function'</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+		<span class="token keyword">return</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+			<span class="token keyword">return</span> <span class="token function">obj</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token punctuation">}</span>
+	<span class="token punctuation">}</span>
+	<span class="token comment">/* 如果是正则和日期对象 返回一个新的相等的对象 */</span>
+	<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">^(RegExp|Date)$</span><span class="token regex-delimiter">/</span></span><span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+		<span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">obj<span class="token punctuation">.</span>constructor</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+
+	<span class="token comment">/* 对数组、对象、类数组对象的浅克隆 */</span>
+	<span class="token keyword">let</span> keys <span class="token operator">=</span> <span class="token function">getOwnProperty</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">let</span> newObj <span class="token operator">=</span> Array<span class="token punctuation">.</span><span class="token function">isArray</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token operator">?</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">:</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+	keys<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token parameter">key</span><span class="token operator">=&gt;</span><span class="token punctuation">{</span>
+		newObj<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> obj<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span><span class="token punctuation">)</span>
+	<span class="token keyword">return</span> newObj<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="重点-手写一个深克隆方法deepclone"><a href="#重点-手写一个深克隆方法deepclone" class="header-anchor">#</a> 重点：手写一个深克隆方法deepClone</h2> <ol><li>原先浅克隆要考虑的问题 深克隆也要考虑</li> <li>深克隆是在浅克隆的基础上增加了递归调用实现的</li> <li>递归调用的时候需要考虑循环引用造成栈溢出的问题</li> <li>解决循环引用基于ES6的Set数据结构，原理是Set对象中只会存唯一的值</li> <li>只要是Set中存在的值，那么代表已经克隆过了，此时不再进行下一次克隆，从而解决循环引用的问题</li></ol> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">function</span> <span class="token function">deepClone</span><span class="token punctuation">(</span>obj<span class="token punctuation">,</span>cache<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">Set</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	<span class="token comment">/* 解决循环引用造成栈溢出 */</span>
+	<span class="token keyword">if</span><span class="token punctuation">(</span>cache<span class="token punctuation">.</span><span class="token function">has</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">return</span> obj<span class="token punctuation">;</span>
+	cache<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	
+	<span class="token comment">/* 对7种基本数据类型的浅克隆 直接返回值即可 */</span>
+	<span class="token keyword">let</span> type <span class="token operator">=</span> <span class="token function">checkType</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	
+	<span class="token comment">/* 不用typeof是为了避免基本数据包装类的干扰 */</span>
+	<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">^(Number|String|Boolean|Null|Undefined|Symbol|BigInt)$</span><span class="token regex-delimiter">/</span></span><span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>type<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+		<span class="token keyword">return</span> obj<span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+	
+	<span class="token comment">/* 如果是函数返回一个新的函数 执行新的函数 原来函数也会一起执行 */</span>
+	<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> obj <span class="token operator">===</span> <span class="token string">'function'</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+		<span class="token keyword">return</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+			<span class="token keyword">return</span> <span class="token function">obj</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token punctuation">}</span>
+	<span class="token punctuation">}</span>
+	<span class="token comment">/* 如果是正则和日期对象 返回一个新的相等的对象 */</span>
+	<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">^(RegExp|Date)$</span><span class="token regex-delimiter">/</span></span><span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+		<span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">obj<span class="token punctuation">.</span>constructor</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+
+	<span class="token comment">/* 对数组、对象、类数组对象的浅克隆 */</span>
+	<span class="token keyword">let</span> keys <span class="token operator">=</span> <span class="token function">getOwnProperty</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">let</span> newObj <span class="token operator">=</span> Array<span class="token punctuation">.</span><span class="token function">isArray</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token operator">?</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">:</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+	keys<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token parameter">key</span><span class="token operator">=&gt;</span><span class="token punctuation">{</span>
+		newObj<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">deepClone</span><span class="token punctuation">(</span>obj<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">,</span>cache<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span><span class="token punctuation">)</span>
+	<span class="token keyword">return</span> newObj<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="对象的深浅合并和比较"><a href="#对象的深浅合并和比较" class="header-anchor">#</a> 对象的深浅合并和比较</h2> <blockquote><blockquote><blockquote><p>需求场景
+当我们封装一个插件或者方法的时候，该方法的参数是一个对象(类似axios),该参数对象会有一个默认配置参数，而当用户调用该方法时会传递自己的配置参数，此时就需要将用户传递的参数覆盖默认的参数。</p></blockquote></blockquote></blockquote> <blockquote><blockquote><blockquote><p>默认参数配置</p></blockquote></blockquote></blockquote> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">let</span> defaults <span class="token operator">=</span> <span class="token punctuation">{</span>
+	<span class="token literal-property property">url</span><span class="token operator">:</span><span class="token string">''</span><span class="token punctuation">,</span>
+	<span class="token literal-property property">method</span><span class="token operator">:</span><span class="token string">'GET'</span><span class="token punctuation">,</span>
+	<span class="token literal-property property">headers</span><span class="token operator">:</span><span class="token punctuation">{</span>
+		<span class="token string-property property">'Content-Type'</span><span class="token operator">:</span><span class="token string">'application/json'</span>
+	<span class="token punctuation">}</span><span class="token punctuation">,</span>
+	<span class="token literal-property property">data</span><span class="token operator">:</span><span class="token keyword">null</span><span class="token punctuation">,</span>
+	<span class="token literal-property property">cache</span><span class="token operator">:</span><span class="token punctuation">[</span><span class="token boolean">true</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre></div><blockquote><blockquote><blockquote><p>用户自定义参数配置</p></blockquote></blockquote></blockquote> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">let</span> options <span class="token operator">=</span> <span class="token punctuation">{</span>
+	<span class="token literal-property property">url</span><span class="token operator">:</span><span class="token string">'/api/index/list'</span><span class="token punctuation">,</span>
+	<span class="token literal-property property">headers</span><span class="token operator">:</span><span class="token punctuation">{</span>
+		<span class="token string-property property">'Content-Language'</span><span class="token operator">:</span> <span class="token string">'zh-CN'</span>
+	<span class="token punctuation">}</span><span class="token punctuation">,</span>
+	<span class="token literal-property property">data</span><span class="token operator">:</span><span class="token punctuation">{</span>
+		<span class="token literal-property property">id</span><span class="token operator">:</span><span class="token number">1</span><span class="token punctuation">,</span>
+		<span class="token literal-property property">page</span><span class="token operator">:</span><span class="token number">10</span>
+	<span class="token punctuation">}</span><span class="token punctuation">,</span>
+	<span class="token literal-property property">cache</span><span class="token operator">:</span><span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">20</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre></div><blockquote><blockquote><blockquote><p>解决方案1：基于原生Object.assign(defaults,options)进行对象合并
+基于Object.assign(defaults,options),该方法执行后不会返回一个新对象，而是把第二个参数options对象中的所有属性拿出来去一一和第一个参数defaults对象中的属性对比，如果属性名不相等，那么直接添加上去，如果属性名相等，那么直接进行覆盖。也就是说原来defaults中的属性值会完全被替换。
+可以看到：header属性被完全覆盖，而不是进行合并，cache属性值也是，这是因为assign合并只会将第一层进行完全的覆盖合并。</p></blockquote></blockquote></blockquote> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">let</span> options <span class="token operator">=</span> <span class="token punctuation">{</span>
+	<span class="token literal-property property">url</span><span class="token operator">:</span><span class="token string">'/api/index/list'</span><span class="token punctuation">,</span>
+	<span class="token literal-property property">method</span><span class="token operator">:</span> <span class="token string">&quot;GET&quot;</span>
+	<span class="token literal-property property">headers</span><span class="token operator">:</span><span class="token punctuation">{</span>
+		<span class="token string-property property">'Content-Language'</span><span class="token operator">:</span> <span class="token string">'zh-CN'</span>
+	<span class="token punctuation">}</span><span class="token punctuation">,</span>
+	<span class="token literal-property property">data</span><span class="token operator">:</span><span class="token punctuation">{</span>
+		<span class="token literal-property property">id</span><span class="token operator">:</span><span class="token number">1</span><span class="token punctuation">,</span>
+		<span class="token literal-property property">page</span><span class="token operator">:</span><span class="token number">10</span>
+	<span class="token punctuation">}</span><span class="token punctuation">,</span>
+	<span class="token literal-property property">cache</span><span class="token operator">:</span><span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">20</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><blockquote><blockquote><blockquote><p>解决方案2：手动封装一个对象深度合并的merge方法
+参数：obj1 最后输出的目标对象
+obj2 用来进行合并的源对象
+处理情况：
+1.obj1和obj2都是对象，那么依次遍历obj2，把obj2的每一项替换obj1中的每一项
+2.obj1对象，obj2不是对象，那么不处理直接返回obj1
+3.obj1不是对象，obj2是对象</p></blockquote></blockquote></blockquote> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">function</span> <span class="token function">merge</span><span class="token punctuation">(</span><span class="token parameter">obj1<span class="token punctuation">,</span>obj2</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="检测一个值是否为纯对象-数组正则等都不算"><a href="#检测一个值是否为纯对象-数组正则等都不算" class="header-anchor">#</a> 检测一个值是否为纯对象{} 数组正则等都不算</h2> <h2 id="检测一个值是否为空对象"><a href="#检测一个值是否为空对象" class="header-anchor">#</a> 检测一个值是否为空对象{}</h2></div></section> <footer class="page-edit"><!----> <!----></footer> <!----> <div class="comments-wrapper"><!----></div> <ul class="side-bar sub-sidebar-wrapper" style="width:12rem;" data-v-cb1513f6><li class="level-2" data-v-cb1513f6><a href="/gaokai-blog/gaokai-blog/%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D.html#js中深浅克隆的含义" class="sidebar-link reco-side-js中深浅克隆的含义" data-v-cb1513f6>JS中深浅克隆的含义</a></li><li class="level-2" data-v-cb1513f6><a href="/gaokai-blog/gaokai-blog/%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D.html#最简单的办法-循环遍历对象-挨个进行赋值-浅克隆" class="sidebar-link reco-side-最简单的办法-循环遍历对象-挨个进行赋值-浅克隆" data-v-cb1513f6>最简单的办法：循环遍历对象，挨个进行赋值，浅克隆</a></li><li class="level-2" data-v-cb1513f6><a href="/gaokai-blog/gaokai-blog/%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D.html#浅克隆对象的方案" class="sidebar-link reco-side-浅克隆对象的方案" data-v-cb1513f6>浅克隆对象的方案</a></li><li class="level-2" data-v-cb1513f6><a href="/gaokai-blog/gaokai-blog/%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D.html#浅克隆数组的方案" class="sidebar-link reco-side-浅克隆数组的方案" data-v-cb1513f6>浅克隆数组的方案</a></li><li class="level-2" data-v-cb1513f6><a href="/gaokai-blog/gaokai-blog/%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D.html#快速深克隆简单对象-数组的方案-json-parse-json-stringify" class="sidebar-link reco-side-快速深克隆简单对象-数组的方案-json-parse-json-stringify" data-v-cb1513f6>快速深克隆简单对象/数组的方案 JSON.parse(JSON.stringify())</a></li><li class="level-2" data-v-cb1513f6><a href="/gaokai-blog/gaokai-blog/%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D.html#重点-手写一个浅克隆方法shallowclone" class="sidebar-link reco-side-重点-手写一个浅克隆方法shallowclone" data-v-cb1513f6>重点：手写一个浅克隆方法shallowClone</a></li><li class="level-2" data-v-cb1513f6><a href="/gaokai-blog/gaokai-blog/%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D.html#重点-手写一个深克隆方法deepclone" class="sidebar-link reco-side-重点-手写一个深克隆方法deepclone" data-v-cb1513f6>重点：手写一个深克隆方法deepClone</a></li><li class="level-2" data-v-cb1513f6><a href="/gaokai-blog/gaokai-blog/%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D.html#对象的深浅合并和比较" class="sidebar-link reco-side-对象的深浅合并和比较" data-v-cb1513f6>对象的深浅合并和比较</a></li><li class="level-2" data-v-cb1513f6><a href="/gaokai-blog/gaokai-blog/%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D.html#检测一个值是否为纯对象-数组正则等都不算" class="sidebar-link reco-side-检测一个值是否为纯对象-数组正则等都不算" data-v-cb1513f6>检测一个值是否为纯对象{} 数组正则等都不算</a></li><li class="level-2" data-v-cb1513f6><a href="/gaokai-blog/gaokai-blog/%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D.html#检测一个值是否为空对象" class="sidebar-link reco-side-检测一个值是否为空对象" data-v-cb1513f6>检测一个值是否为空对象{}</a></li></ul></main> <!----></div></div></div></div><div class="global-ui"><div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;display:none;" data-v-c6073ba8 data-v-c6073ba8><svg t="1574745035067" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5404" class="icon" data-v-c6073ba8><path d="M526.60727968 10.90185116a27.675 27.675 0 0 0-29.21455937 0c-131.36607665 82.28402758-218.69155461 228.01873535-218.69155402 394.07834331a462.20625001 462.20625001 0 0 0 5.36959153 69.94390903c1.00431239 6.55289093-0.34802892 13.13561351-3.76865779 18.80351572-32.63518765 54.11355614-51.75690182 118.55860487-51.7569018 187.94566865a371.06718723 371.06718723 0 0 0 11.50484808 91.98906777c6.53300375 25.50556257 41.68394495 28.14064038 52.69160883 4.22606766 17.37162448-37.73630017 42.14135425-72.50938081 72.80769204-103.21549295 2.18761121 3.04276886 4.15646224 6.24463696 6.40373557 9.22774369a1871.4375 1871.4375 0 0 0 140.04691725 5.34970492 1866.36093723 1866.36093723 0 0 0 140.04691723-5.34970492c2.24727335-2.98310674 4.21612437-6.18497483 6.3937923-9.2178004 30.66633723 30.70611158 55.4360664 65.4791928 72.80769147 103.21549355 11.00766384 23.91457269 46.15860503 21.27949489 52.69160879-4.22606768a371.15156223 371.15156223 0 0 0 11.514792-91.99901164c0-69.36717486-19.13165746-133.82216804-51.75690182-187.92578088-3.42062944-5.66790279-4.76302748-12.26056868-3.76865837-18.80351632a462.20625001 462.20625001 0 0 0 5.36959269-69.943909c-0.00994388-166.08943902-87.32547796-311.81420293-218.6915546-394.09823051zM605.93803103 357.87693858a93.93749974 93.93749974 0 1 1-187.89594924 6.1e-7 93.93749974 93.93749974 0 0 1 187.89594924-6.1e-7z" p-id="5405" data-v-c6073ba8></path><path d="M429.50777625 765.63860547C429.50777625 803.39355007 466.44236686 1000.39046097 512.00932183 1000.39046097c45.56695499 0 82.4922232-197.00623328 82.5015456-234.7518555 0-37.75494459-36.9345906-68.35043303-82.4922232-68.34111062-45.57627738-0.00932239-82.52019037 30.59548842-82.51086798 68.34111062z" p-id="5406" data-v-c6073ba8></path></svg></div></div></div>
+    <script src="/gaokai-blog/assets/js/app.4602dd1e.js" defer></script><script src="/gaokai-blog/assets/js/3.ad6a990c.js" defer></script><script src="/gaokai-blog/assets/js/1.9e037d9f.js" defer></script><script src="/gaokai-blog/assets/js/13.64a46518.js" defer></script>
+  </body>
+</html>
